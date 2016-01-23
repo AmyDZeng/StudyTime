@@ -5,26 +5,38 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 // import info.androidhive.materialtabs.R;
 
 
-public class ThreeFragment extends Fragment{
+public class ThreeFragment extends OneFragment{
 
     public ThreeFragment() {
         // Required empty public constructor
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+    public void processFinish(ArrayList<String> output){
+        if(output.get(0) == "ERROR"){
+            Toast.makeText(this.getActivity(), output.get(1).toString(), Toast.LENGTH_LONG).show();
+            return;
+        }
+        for(int i = 0; i < output.size(); i++){
+            temp = output.get(i).split("\\s*,\\s*");
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_one, container, false);
+            ids.add(temp[0]);
+            courses.add(temp[1] + " " + temp[2]);
+            locations.add(temp[3]);
+            checkIns.add(Integer.parseInt(temp[4]));
+        }
+        // TODO: SORT AND SEARCH BASED ON YOUR FAVORITED ONES
+
+        mAdapter = new MyAdapter(this.getActivity(), ids, courses, locations, checkIns);
+
+        mRecyclerView.setAdapter(mAdapter);
     }
 
 }

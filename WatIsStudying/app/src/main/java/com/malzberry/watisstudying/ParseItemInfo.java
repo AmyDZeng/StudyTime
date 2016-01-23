@@ -7,46 +7,52 @@ import android.widget.Toast;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
-public class ParseItemInfo extends AsyncTask<String, Void, String[]> {
+/*
+{id: String,
+    coursePrefix: String,
+    courseNumber: Number,
+    location: String,
+    checkinAmount : Number}
+ */
+public class ParseItemInfo extends AsyncTask<String, Void, ArrayList<String>> {
     public AsyncResponse delegate = null;
     public ParseItemInfo(AsyncResponse ar) { delegate = ar;  }
+    ArrayList<String> output = new ArrayList<String>();
 
     @Override
-    protected String[] doInBackground(String... strings)  {
+    protected ArrayList<String> doInBackground(String... strings)  {
         StringBuffer buffer = new StringBuffer();
         JSONObject json;
         JSONArray jsonArr;
-        String summonerId = "", summonerData = "", url = "";
-        String output[] = {"", "", "", "", ""},  champUrl = "", id = "", playerUrl = "", rank = "";
-        String playerIds[] = {"","","","","","","","","",""};
+        String url = "https://watstudy.herokuapp.com/api/all";
 
-        try { //TODO: in the try, organize names by team numbers
-            url =  "https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/"
-                    + strings[0].toLowerCase().replaceAll(" ", "%20")
-                    + "?api_key=f491797f-4845-4a08-b280-a337e2fae904";
+        try {
+            url =  strings[0];
+            jsonArr = JsonReader.readJsonArrFromUrl(url);
+            //json = JsonReader.readJsonFromUrl(url);
 
-            json = JsonReader.readJsonFromUrl(url);
-            summonerId = (json.getJSONObject(json.names().getString(0))).getString("id");
+            for(int i = 0; i < jsonArr.length(); i++){
+                // scrape info from json obj.
+                json = jsonArr.getJSONObject(i);
+                output.add(json.get("_id") + "," +
+                        json.get("coursePrefix")+ "," +
+                        json.get("courseNumber")+ "," +
+                        json.get("location")+ "," +
+                        json.get("checkinAmount"));
+            }
 
-            // use ID to get raw data
-            url = "https://na.api.pvp.net/observer-mode/rest/consumer/getSpectatorGameInfo/NA1/"
-                    + summonerId + "?api_key=f491797f-4845-4a08-b280-a337e2fae904";
-
-            summonerData = JsonReader.readStringJsonFromUrl(url);
         } catch(Exception e){
-            // TODO: throw 2 different exceptions, player doesn't exist && player not in a game rn.
-            output[0] = "error";
-            //output[1] = e.toString();
-            output[1] = "Player doesn't exist or isn't currently in game.";
-            return output;
+            output.add(0, "ERROR");
+            output.add(1, e.toString());
         }
-
         return output;
     }
 
     @Override
-    protected void onPostExecute(String[] s) {
+    protected void onPostExecute(ArrayList<String> s) {
         super.onPostExecute(s);
         delegate.processFinish(s);
     }

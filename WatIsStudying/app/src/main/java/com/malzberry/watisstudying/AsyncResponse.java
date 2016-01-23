@@ -1,5 +1,7 @@
 package com.malzberry.watisstudying;
 
+import java.util.ArrayList;
+
 public interface AsyncResponse {
-    void processFinish(String output[]);
+    void processFinish(ArrayList<String> output);
 }
