@@ -32,12 +32,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         // each data item is just a string in this case
         public TextView txtHeader;
         public TextView txtFooter;
+        public TextView txtCheckIns;
 
         public ViewHolder(View v) {
             super(v);
             // declare xml elements here
             txtFooter = (TextView) v.findViewById(R.id.secondLine);
             txtHeader = (TextView) v.findViewById(R.id.firstLine);
+            txtCheckIns = (TextView) v.findViewById(R.id.check_ins);
         }
     }
     // TODO: FINISH THESE?? add & remove
@@ -88,17 +90,21 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         holder.txtHeader.setText(courses.get(position));
         holder.txtFooter.setText(locations.get(position));
+        if(checkIns.get(position) == 1) {
+            holder.txtCheckIns.setText(checkIns.get(position) + " Check-In");
+        }else{
+            holder.txtCheckIns.setText(checkIns.get(position) + " Check-Ins");
+        }
 
         holder.txtHeader.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO: go to second page
-                // Toast.makeText(v.getContext(), "click", Toast.LENGTH_LONG).show();
 
 
-                Intent goToDisplay = new Intent(activity.getBaseContext(), DisplayInfo.class); // make display
-                //goToDisplay.putExtra("player", name);
-                activity.startActivity(goToDisplay);
+                //Intent goToDisplay = new Intent(activity.getBaseContext(), DisplayInfo.class); // make display
+
+                //activity.startActivity(goToDisplay);
 
             }
         });

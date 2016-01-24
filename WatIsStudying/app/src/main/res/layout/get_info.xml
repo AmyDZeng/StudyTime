@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:layout_scrollFlags="snap"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        />
+    <!--app:layout_scrollFlags="scroll|enterAlways"-->
+
+    <!--TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:text="Subject (eg. CS, MATH, PSYCH):"
+        android:layout_below="@+id/toolbar"
+        android:id="@+id/tv_subject"
+        android:padding="10dp"
+        android:paddingTop="16dp"/>
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_subject"
+        android:textSize="18dp"
+        android:paddingBottom="20dp"
+        android:id="@+id/et_subject"/-->
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:id="@+id/courses"></Spinner>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:textSize="18dp"
+        android:text="Course number:"
+        android:layout_below="@+id/courses"
+        android:id="@+id/tv_course_num"
+        android:padding="10dp"/>
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_course_num"
+        android:inputType="number|none"
+        android:digits="0123456789"
+        android:textSize="18dp"
+        android:maxLength="3"
+        android:paddingBottom="20dp"
+        android:id="@+id/et_course_num"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:textSize="18dp"
+        android:text="Room:"
+        android:layout_below="@+id/et_course_num"
+        android:id="@+id/tv_room"
+        android:padding="10dp"/>
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_room"
+        android:textSize="18dp"
+        android:maxLength="140"
+        android:paddingBottom="20dp"
+        android:id="@+id/et_room"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:text="[Optional] notes:"
+        android:layout_below="@+id/et_room"
+        android:id="@+id/tv_desc"
+        android:padding="10dp"/>
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_desc"
+        android:textSize="18dp"
+        android:maxLength="140"
+        android:paddingBottom="20dp"
+        android:id="@+id/et_desc"/>
+
+    <!--Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/go_btn"
+        android:layout_below="@+id/et_desc"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:text="Start Broadcasting"
+        android:layout_alignParentBottom="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        /-->
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:id="@+id/submit_btn"
+        android:text="Start Broadcast"
+        android:gravity="center"
+        android:background="?attr/colorPrimary"
+        android:padding="32dp"
+        android:textSize="16dp"
+        android:layout_alignParentBottom="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        />
+
+
+
+
+</RelativeLayout>

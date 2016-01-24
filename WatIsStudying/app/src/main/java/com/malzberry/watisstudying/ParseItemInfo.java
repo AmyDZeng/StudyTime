@@ -33,7 +33,7 @@ public class ParseItemInfo extends AsyncTask<String, Void, ArrayList<String>> {
             url =  strings[0];
             jsonArr = JsonReader.readJsonArrFromUrl(url);
             //json = JsonReader.readJsonFromUrl(url);
-
+            // TODO: return function of time
             for(int i = 0; i < jsonArr.length(); i++){
                 // scrape info from json obj.
                 json = jsonArr.getJSONObject(i);

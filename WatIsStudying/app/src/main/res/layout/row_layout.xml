@@ -3,7 +3,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="?android:attr/listPreferredItemHeight"
-    android:padding="8dip"
+    android:padding="12dip"
     android:clickable="true">
 
     <TextView
@@ -15,6 +15,21 @@
         android:ellipsize="marquee"
         android:singleLine="true"
         android:text="Description"
+        android:layout_below="@+id/firstLine"
+        android:textSize="14sp"
+        />
+
+    <TextView
+        android:id="@+id/check_ins"
+        android:layout_width="fill_parent"
+        android:layout_height="26dip"
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:text="Check-Ins"
         android:textSize="12sp"
         />
 
@@ -22,13 +37,13 @@
         android:id="@+id/firstLine"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/secondLine"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_alignWithParentIfMissing="true"
         android:gravity="center_vertical"
         android:text="Example application"
-        android:textSize="16sp"
+        android:textSize="18sp"
         />
+
 
 </RelativeLayout>

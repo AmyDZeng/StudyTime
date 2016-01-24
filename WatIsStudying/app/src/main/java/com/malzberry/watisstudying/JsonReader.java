@@ -29,7 +29,7 @@ public class JsonReader {
 
         HttpURLConnection con;
         //con = (HttpURLConnection) new URL("http://localhost:8080/myapp/service/generate").openConnection();
-        con = (HttpURLConnection) new URL(url).openConnection();
+        con = (HttpURLConnection) new URL("https://watstudy.herokuapp.com/api/all").openConnection();
         con.setRequestMethod("GET");
         //con.setDoOutput(true);
         con.setDoInput(true);

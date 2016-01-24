@@ -1,5 +1,6 @@
 package com.malzberry.watisstudying;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -8,11 +9,15 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
 /*
 import info.androidhive.materialtabs.R;
 import info.androidhive.materialtabs.fragments.OneFragment;
@@ -24,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    static Button broadcast;
+    public static boolean broadcasting = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
         // TODO: ???
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Study Square");
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPager.setOffscreenPageLimit(3);
@@ -43,8 +51,44 @@ public class MainActivity extends AppCompatActivity {
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+
+        broadcast = (Button) findViewById(R.id.broadcast_button);
+        broadcast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(broadcasting == false) {
+                    Intent goToDisplay = new Intent(MainActivity.this, GetInfo.class); // make display
+                    startActivity(goToDisplay);
+                }else{
+                    // stop broadcasting
+
+                }
+            }
+        });
     }
 
+    public static void notifyBroadcastChange(){
+        if(broadcasting == false)broadcast.setText("Broadcasting");
+        else broadcast.setText("Stop Broadcasting");
+    }
+/*
+    public static void sendRequest(String request) throws Exception{
+        try {
+            URL url = new URL("https://watstudy.herokuapp.com/api/add");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setDoOutput(true);
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json");
+
+            OutputStream os = conn.getOutputStream();
+            os.write(request.getBytes());
+            os.flush();
+
+        }catch( Exception e){
+
+        }
+    }
+*/
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new OneFragment(), "RECENT");
